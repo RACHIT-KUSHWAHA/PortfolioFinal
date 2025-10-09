@@ -1,0 +1,212 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global theme + spotlight background */
+:root {
+	--spot-x: 50vw;
+	--spot-y: 30vh;
+}
+
+html, body, #root {
+	height: 100%;
+}
+
+body {
+	background-color: #0a0a0d; /* fallback if Tailwind classes aren't loaded */
+	color: #e4e4e7; /* zinc-200 fallback */
+	transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Light theme */
+html.light body {
+	background-color: #f8f9fa;
+	color: #1a1a1a;
+}
+
+html.light {
+	--bg: #f8f9fa;
+	--card: #ffffff;
+}
+
+/* Custom scrollbar for YouTube feed mockup */
+.custom-scrollbar::-webkit-scrollbar {
+	width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 3px;
+	transition: background 0.2s;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+	background: rgba(255, 255, 255, 0.3);
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide::-webkit-scrollbar {
+	display: none;
+}
+
+.scrollbar-hide {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+/* Soft radial spotlight following the pointer (performance friendly) */
+body::before {
+	content: '';
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	background: radial-gradient(600px 400px at var(--spot-x) var(--spot-y), rgba(124,58,237,0.08), transparent 60%);
+	transition: opacity 0.5s ease;
+}
+
+html.light body::before {
+	background: radial-gradient(600px 400px at var(--spot-x) var(--spot-y), rgba(124,58,237,0.05), transparent 60%);
+}
+
+/* Utility: responsive horizontal padding similar to container */
+.container-px {
+	padding-left: max(1rem, env(safe-area-inset-left));
+	padding-right: max(1rem, env(safe-area-inset-right));
+}
+
+/* Hero name animation styles - Argus inspired with Poppins */
+.hero-name .char {
+  display: inline-block;
+  position: relative;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: white !important;
+  opacity: 1 !important;
+  animation: fadeInChar 0.6s ease-out backwards;
+  animation-delay: calc(var(--char-index, 0) * 0.03s);
+}
+
+@keyframes fadeInChar {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-name {
+  font-family: 'Poppins', sans-serif;
+  font-variation-settings: 'wght' 600;
+  text-rendering: optimizeLegibility;
+  color: white !important;
+}
+
+.hero-text-layer {
+  color: white !important;
+  opacity: 1 !important;
+}
+
+.hero-text-layer .char {
+  color: white !important;
+  opacity: 1 !important;
+}
+
+/* Base text layer - white by default, always visible unless hovered */
+.hero-base-text {
+  color: white !important;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.hero-base-text .char {
+  color: white !important;
+}
+
+/* Ensure sharp rendering */
+.hero-thumbnail-overlay {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+.hero-thumbnail-overlay .char {
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+/* Primary CTA hover glow */
+.primary-cta {
+  position: relative;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.primary-cta:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(124,58,237,0.14), 0 2px 8px rgba(34,211,238,0.07);
+}
+
+/* Social icon links */
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  color: #cbd5e1; /* zinc-300 */
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+  transition: transform 140ms ease, background 140ms ease, color 140ms ease;
+}
+.icon-link:hover {
+  transform: translateY(-3px);
+  color: white;
+  background: linear-gradient(90deg, rgba(124,58,237,0.12), rgba(34,211,238,0.06));
+}
+
+/* 3D Cylinder Scroll Effect for Thumbnails */
+#projects {
+  perspective: 2000px;
+  perspective-origin: center center;
+}
+
+.thumbnail-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Enhanced glassmorphism - simplified */
+.glass {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(8px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.1);
+}
+
+html.light .glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px) saturate(120%);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* GPU acceleration for smooth animations */
+.hero-name .char,
+.thumbnail-3d,
+[class*="motion-"],
+.glass {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
