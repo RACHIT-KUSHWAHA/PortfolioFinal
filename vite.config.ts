@@ -16,7 +16,7 @@ export default defineConfig({
         manualChunks: {
           'react-vendor': ['react', 'react-dom'],
           'animation-vendor': ['framer-motion', 'gsap'],
-          'scroll-vendor': ['lenis', '@studio-freight/lenis']
+          'scroll-vendor': ['lenis']
         }
       }
     },
